@@ -1,6 +1,6 @@
 import { bindingMode, DOM, ElementEvents, IStaticViewConfig, PLATFORM } from 'aurelia-framework';
 import { bindable, observable } from 'aurelia-typed-observable-plugin';
-import * as dragula from 'dragula';
+import dragula from 'dragula';
 import { Filter, Sort, CfEnsureVisible, CfDetached, CfAttached } from './resources';
 import { arrRemove, last } from './utilities';
 import CRUD_FILTER_VIEW from './crud-filter.html';

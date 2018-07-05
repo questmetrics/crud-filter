@@ -3,6 +3,9 @@ import ts from "rollup-plugin-typescript2";
 import resolve from "rollup-plugin-node-resolve";
 import commonJS from "rollup-plugin-commonjs";
 import uglify from "rollup-plugin-uglify";
+import html from 'rollup-plugin-html';
+import { createFilter } from 'rollup-pluginutils';
+import csso from 'csso';
 
 const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
 
@@ -14,8 +17,8 @@ function when(predicate, opts) {
 
 function output(target, format, opts = {}) {
   return {
-    input: `src/${pkg.name}.ts`,
-    output: { ...{ file: `dist/${mod}/${pkg.name}${minify ? ".min" : ""}.js`, format, name: pkg.name }, ...opts },
+    input: `src/index.ts`,
+    output: { ...{ file: `dist/${mod}/index${minify ? ".min" : ""}.js`, format, name: pkg.name }, ...opts },
     plugins: [
       resolve(),
       commonJS({
@@ -49,12 +52,48 @@ function output(target, format, opts = {}) {
             comments: false
           }
         })
-      )
+      ),
+      html({
+        include: '**/*.html',
+        htmlMinifierOptions: {
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          conservativeCollapse: false,
+          minifyJS: true
+        }
+      }),
+      css()
     ],
     external: [
-      // add any peerDependencies here that you don't want included in the bundle, for example:
-      //"aurelia-framework"
+      'aurelia-framework',
+      'aurelia-blur-attribute',
+      'aurelia-portal-attribute',
+      'aurelia-typed-observable-plugin',
+      'dragula',
     ]
+  };
+}
+
+function css () {
+  const filter = createFilter(['**/*.css'], []);
+
+  return {
+    name: 'css',
+    transform (code, id) {
+      if (!filter(id)) {
+        return;
+      }
+
+      return {
+        code: 'export default ' + JSON.stringify(csso.minify(code, {
+          restructure: false,
+          debug: false,
+          sourceMap: false
+        }).css),
+        map: { mappings: '' }
+      };
+    }
   };
 }
 

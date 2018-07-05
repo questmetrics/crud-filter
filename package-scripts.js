@@ -118,21 +118,21 @@ module.exports = {
               "build.dist.rollup.amd.default",
               "build.dist.rollup.commonjs.default",
               "build.dist.rollup.es2015.default",
-              "build.dist.rollup.es2017.default",
-              "build.dist.rollup.esnext.default",
+              // "build.dist.rollup.es2017.default",
+              // "build.dist.rollup.esnext.default",
               "build.dist.rollup.nativeModules.default",
-              "build.dist.rollup.system.default",
-              "build.dist.rollup.umd.default"
+              // "build.dist.rollup.system.default",
+              // "build.dist.rollup.umd.default"
             ),
             minify: concurrent.nps(
               "build.dist.rollup.amd.minify",
               "build.dist.rollup.commonjs.minify",
               "build.dist.rollup.es2015.minify",
-              "build.dist.rollup.es2017.minify",
-              "build.dist.rollup.esnext.default",
+              // "build.dist.rollup.es2017.minify",
+              // "build.dist.rollup.esnext.default",
               "build.dist.rollup.nativeModules.minify",
-              "build.dist.rollup.system.minify",
-              "build.dist.rollup.umd.minify"
+              // "build.dist.rollup.system.minify",
+              // "build.dist.rollup.umd.minify"
             )
           },
           amd: {

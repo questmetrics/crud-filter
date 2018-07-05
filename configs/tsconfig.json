@@ -16,14 +16,17 @@
     "downlevelIteration": true, //default: false
     //"emitBOM": false,
     "emitDecoratorMetadata": true, //default: false
-    "esModuleInterop": true, //default: false
+    "esModuleInterop": false, //default: false
     "experimentalDecorators": true, //default: false
     "forceConsistentCasingInFileNames": true, //default: false
     //"importHelpers": false,
     //"inlineSourceMap": false,
     //"inlineSources": false,
     //"jsxFactory": "React.createElement",
-    "lib": ["dom", "es2017"], //default: --target ES5: DOM,ES5,ScriptHost; --target ES6: DOM,ES6,DOM.Iterable,ScriptHost
+    "lib": [
+      "dom",
+      "es2017"
+    ], //default: --target ES5: DOM,ES5,ScriptHost; --target ES6: DOM,ES6,DOM.Iterable,ScriptHost
     //"listEmittedFiles": false,
     //"listFiles": false,
     //"mapRoot": "",
@@ -58,7 +61,7 @@
     //"sourceRoot": "",
     //"strict": false,
     //"strictFunctionTypes": false,
-    //"strictPropertyInitialization": false,
+    "strictPropertyInitialization": false,
     //"strictNullChecks": false,
     //"stripInternal": false,
     //"suppressExcessPropertyErrors": false,
