@@ -37,13 +37,13 @@ describe('router-view', () => {
   });
 
   it('should leave original items alone', done => {
+    const app: AppViewModel = new AppViewModel();
     view = '<crud-filter view-model.ref="crudFilter" item-key="name" items.bind="items"></crud-filter>';
     component
       .inView(view)
-      .boundTo(new AppViewModel())
+      .boundTo(app)
       .create(cfg => cfg(aurelia))
       .then(() => {
-        const app = component.viewModel;
         expect(app.items).toBe(app.crudFilter.items, 'CF `items` collection should be the same with original');
         expect(app.items).not.toBe(app.crudFilter.filteredItems as AppItem[]);
       })
