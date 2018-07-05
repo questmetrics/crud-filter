@@ -1,5 +1,6 @@
 /node_modules
 /scripts
+/configs/types
 coverage
 yarn-error.log
 .rollupcache

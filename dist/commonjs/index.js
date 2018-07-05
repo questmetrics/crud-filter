@@ -5,36 +5,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var aureliaFramework = require('aurelia-framework');
+var tslib_1 = require('tslib');
 var aureliaTypedObservablePlugin = require('aurelia-typed-observable-plugin');
 var dragula = _interopDefault(require('dragula'));
 var aureliaBlurAttribute = require('aurelia-blur-attribute');
 var aureliaPortalAttribute = require('aurelia-portal-attribute');
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
 
 /**
  * Internal resources of <crud-filter/>
@@ -634,97 +609,97 @@ CrudFilter.$view = {
     template: CRUD_FILTER_VIEW,
     dependencies: [Filter, Sort, CfEnsureVisible, CfAttached, CfDetached]
 };
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Array)
+    tslib_1.__metadata("design:type", Array)
 ], CrudFilter.prototype, "items", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", String)
+    tslib_1.__metadata("design:type", String)
 ], CrudFilter.prototype, "itemKey", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", String)
+    tslib_1.__metadata("design:type", String)
 ], CrudFilter.prototype, "itemDisplay", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", String)
+    tslib_1.__metadata("design:type", String)
 ], CrudFilter.prototype, "itemTooltip", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Function)
+    tslib_1.__metadata("design:type", Function)
 ], CrudFilter.prototype, "createItem", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Function)
+    tslib_1.__metadata("design:type", Function)
 ], CrudFilter.prototype, "readItem", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Function)
+    tslib_1.__metadata("design:type", Function)
 ], CrudFilter.prototype, "updateItem", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Function)
+    tslib_1.__metadata("design:type", Function)
 ], CrudFilter.prototype, "deleteItem", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Object)
+    tslib_1.__metadata("design:type", Object)
 ], CrudFilter.prototype, "buttons", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "disabled", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "draggable", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "sortable", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "editOnDblclick", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "autoSelect", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable({ defaultBindingMode: aureliaFramework.bindingMode.twoWay }),
-    __metadata("design:type", Object)
+    tslib_1.__metadata("design:type", Object)
 ], CrudFilter.prototype, "selectedItem", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "multiSelect", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "focusOnSelect", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable.booleanAttr(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "filterable", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Boolean)
 ], CrudFilter.prototype, "disabledMask", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.observable(),
-    __metadata("design:type", Object)
+    tslib_1.__metadata("design:type", Object)
 ], CrudFilter.prototype, "contextMenuConfig", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Object)
+    tslib_1.__metadata("design:type", Object)
 ], CrudFilter.prototype, "contextMenuZIndex", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.bindable(),
-    __metadata("design:type", Array)
+    tslib_1.__metadata("design:type", Array)
 ], CrudFilter.prototype, "selectedItems", void 0);
-__decorate([
+tslib_1.__decorate([
     aureliaTypedObservablePlugin.observable(),
-    __metadata("design:type", Array)
+    tslib_1.__metadata("design:type", Array)
 ], CrudFilter.prototype, "filteredItems", void 0);
 
 var css = ".crud-filter .list-group-item:focus{outline:1px dashed #333}.crud-filter .list-group-item:not(.active):hover{background-color:#e2e2e2}.crud-filter.disabled .list-group-item:not(.active){background-color:#f2f2f2}.crud-filter .list-group-item-hover{display:none}.crud-filter .list-group-item:hover .list-group-item-hover{display:block}.crud-filter .list-group-item.active:hover .list-group-item-hover{color:#fff!important}"

@@ -25,12 +25,14 @@ function output(target, format, opts = {}) {
         include: "node_modules/**"
       }),
       ts({
+        useTsconfigDeclarationDir: true,
         tsconfig: `configs/tsconfig-build-${mod}.json`,
         tsconfigOverride: {
           compilerOptions: {
             target,
-            module: target === "es2017" ? "es2015" : target,
-            declaration: !minify
+            module: target === "es2017" || target === 'es2018' ? "es2015" : target,
+            declaration: !minify && target === "es2015",
+            declarationDir: '../dist/types'
           }
         },
         cacheRoot: `.rollupcache/${mod}`
@@ -71,6 +73,7 @@ function output(target, format, opts = {}) {
       'aurelia-portal-attribute',
       'aurelia-typed-observable-plugin',
       'dragula',
+      'tslib'
     ]
   };
 }

@@ -115,9 +115,9 @@ module.exports = {
           minify: series.nps("build.dist.rollup.all.minify"),
           all: {
             default: concurrent.nps(
+              "build.dist.rollup.es2015.default",
               "build.dist.rollup.amd.default",
               "build.dist.rollup.commonjs.default",
-              "build.dist.rollup.es2015.default",
               // "build.dist.rollup.es2017.default",
               // "build.dist.rollup.esnext.default",
               "build.dist.rollup.nativeModules.default",
@@ -125,9 +125,9 @@ module.exports = {
               // "build.dist.rollup.umd.default"
             ),
             minify: concurrent.nps(
+              "build.dist.rollup.es2015.minify",
               "build.dist.rollup.amd.minify",
               "build.dist.rollup.commonjs.minify",
-              "build.dist.rollup.es2015.minify",
               // "build.dist.rollup.es2017.minify",
               // "build.dist.rollup.esnext.default",
               "build.dist.rollup.nativeModules.minify",

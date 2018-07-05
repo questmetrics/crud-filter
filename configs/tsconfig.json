@@ -19,7 +19,7 @@
     "esModuleInterop": false, //default: false
     "experimentalDecorators": true, //default: false
     "forceConsistentCasingInFileNames": true, //default: false
-    //"importHelpers": false,
+    "importHelpers": true,
     //"inlineSourceMap": false,
     //"inlineSources": false,
     //"jsxFactory": "React.createElement",
