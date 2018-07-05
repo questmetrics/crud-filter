@@ -1,7 +1,7 @@
 import { bindingMode, DOM, ElementEvents, IStaticViewConfig, PLATFORM } from 'aurelia-framework';
 import { bindable, observable } from 'aurelia-typed-observable-plugin';
 import dragula from 'dragula';
-import { Filter, Sort, CfEnsureVisible, CfDetached, CfAttached } from './resources';
+import { Filter, Sort, CfEnsureVisible, CfDetached, CfAttached, CfClone } from './resources';
 import { arrRemove, last } from './utilities';
 import CRUD_FILTER_VIEW from './crud-filter.html';
 
@@ -56,15 +56,17 @@ export class CrudFilter<T extends Record<string, any> = object> {
       return true;
     }
   };
-
   /**
    * @internal Used by Aurelia view engine
    */
   public static readonly $view: IStaticViewConfig = {
     template: CRUD_FILTER_VIEW,
-    dependencies: [Filter, Sort, CfEnsureVisible, CfAttached, CfDetached]
+    dependencies: [Filter, Sort, CfEnsureVisible, CfAttached, CfDetached, CfClone]
   };
 
+  /**
+   * @internal Declare dependencies needed for this element
+   */
   public static inject(): any[] {
     return [DOM.Element];
   }
@@ -74,7 +76,6 @@ export class CrudFilter<T extends Record<string, any> = object> {
 
   @bindable()
   public itemKey: string;
-
   /**
    * Indicates which property to look for on each items of the array
    * to display
@@ -84,7 +85,6 @@ export class CrudFilter<T extends Record<string, any> = object> {
 
   @bindable()
   public itemTooltip: string;
-
   /**
    * Call back when clicking on [add] button
    */
@@ -99,7 +99,10 @@ export class CrudFilter<T extends Record<string, any> = object> {
 
   @bindable()
   public deleteItem?: (item: T) => void;
-
+  /**
+   * @internal
+   * Buttons definition for controlling the element
+   */
   @bindable()
   public buttons: { add: 'Add'; edit: 'Edit'; delete: 'Delete' } = { add: 'Add', edit: 'Edit', delete: 'Delete' };
   /**
@@ -196,17 +199,23 @@ export class CrudFilter<T extends Record<string, any> = object> {
    * Indicates whether the element is in app document
    */
   private $isAttached: boolean = false;
-
-  private _selectedItems?: T[] = [];
-
-  @observable()
-  private filteredItems?: T[] = [];
-
   /**
+   * @internal
+   */
+  private _selectedItems?: T[] = [];
+  /**
+   * The real item collection that will be displayed on the screen
+   */
+  @observable()
+  public readonly filteredItems?: T[] = [];
+  /**
+   * @internal
    * Use this as a value holder, temporarily wait for `<let/>` element feature
    */
   private itemsCt: CrudFilterItemsCtElement<T>;
-
+  /**
+   * @internal
+   */
   private $el: Element;
 
   constructor(
@@ -441,6 +450,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
     }
   }
 
+  /**
+   * @internal
+   */
   private handleDeleteKey(): void {
     if (this.deleteItem && this.selectedItem) {
       this.deleteItem(this.selectedItem);
@@ -456,6 +468,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
       : this.selectedItem === item;
   }
 
+  /**
+   * @internal Reference to timeout id of updating selected item
+   */
   private _calcSelectedItemTO: any;
   /**
    * @internal Aurelia change handler for property `filteredItems`
@@ -524,7 +539,13 @@ export class CrudFilter<T extends Record<string, any> = object> {
     return;
   }
 
+  /**
+   * @internal Reference to dragula instance
+   */
   private dragApi: dragula.Drake | null;
+  /**
+   * @internal setup events / assign reference to dragula instance
+   */
   private setupDnD(): void {
     if (this.draggable) {
       const { itemsCt } = this;
@@ -576,6 +597,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
     }
   }
 
+  /**
+   * @internal Destroy drag events and remove reference to dragula instance
+   */
   private destroyDnD(): void {
     if (this.dragApi) {
       this.dragApi.destroy();
@@ -583,6 +607,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
     }
   }
 
+  /**
+   * @internal referencs to scroll event check object
+   */
   private srCheckEvents: ElementEvents | null;
   /**
    * @internal Used by Aurelia binding

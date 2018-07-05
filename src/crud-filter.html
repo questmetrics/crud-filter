@@ -1,13 +1,13 @@
 <template
   class='crud-filter d-flex flex-column'
   class.bind="disabled ? 'disabled' : ''"
-  disabled.bind='disabled & booleanAttr'>
+  disabled.bind='disabled'>
   <require from='./refresh-filter'></require>
 
   <div
     style='display: none;'
     filtered-items.from-view='filteredItems'
-    filtered-items.to-view="items | cfFilter :[itemDisplay] :filtertext | cfSort :{ field: itemDisplay, direction: 'ascending', sort: sortable } :items.length | refreshCrudFilteredItems"></div>
+    filtered-items.to-view="items | cfFilter :[itemDisplay] :filtertext | cfSort :{ field: itemDisplay, direction: 'ascending', sort: sortable } :items.length | cfClone"></div>
 
   <div
     class='flex-shrink-0 py-2'

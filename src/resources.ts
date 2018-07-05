@@ -43,7 +43,7 @@ export class Sort {
 
   public static $resource: any = {
     type: 'valueConverter',
-    name: 'cfrSort'
+    name: 'cfSort'
   };
 
   public toView(array: any[] | undefined, params?: ISortValueConverterParams): any[] | undefined {
@@ -171,5 +171,21 @@ export class CfDetached<T = any> {
 
   public unbind(): void {
     delete this.bindingContext;
+  }
+}
+
+/**
+ * @internal Resource for <crud-filter/>
+ * Use to ensure items used for display in <crud-filter/> is always different to original
+ */
+export class CfClone {
+
+  public static readonly $resource: any = {
+    type: 'valueConverter',
+    name: 'cfClone'
+  };
+
+  public toView(value: any[]): any[] {
+    return !Array.isArray(value) || !value.length ? [] : value.slice(0);
   }
 }
