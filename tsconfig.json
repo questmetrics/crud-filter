@@ -1,0 +1,7 @@
+{
+  "extends": "./configs/tsconfig-projectroot.json",
+  "compilerOptions": {
+    "esModuleInterop": false,
+    "strictPropertyInitialization": false
+  }
+}

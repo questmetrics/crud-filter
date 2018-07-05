@@ -1,0 +1,106 @@
+<template
+  class='crud-filter d-flex flex-column'
+  class.bind="disabled ? 'disabled' : ''"
+  disabled.bind='disabled & booleanAttr'>
+  <require from='./refresh-filter'></require>
+
+  <div
+    style='display: none;'
+    filtered-items.from-view='filteredItems'
+    filtered-items.to-view="items | cfFilter :[itemDisplay] :filtertext | cfSort :{ field: itemDisplay, direction: 'ascending', sort: sortable } :items.length | refreshCrudFilteredItems"></div>
+
+  <div
+    class='flex-shrink-0 py-2'
+    show.bind='withButtons'>
+    <button
+      show.bind='createItem'
+      type='button'
+      class='btn btn-success btn-xs px-5'
+      click.trigger='createItem()'
+      disabled.bind='disabled'>
+      <i class='fa fa-plus-circle'></i>${buttons.add ? '&nbsp;' + buttons.add : ''}</button>
+  </div>
+
+  <div
+    show.bind='itemKey && filterable'
+    class='relative flex-shrink-0'
+    style='margin-bottom: 4px;'>
+    <div
+      if.bind='!useCustomFilter'
+      class='input-group input-group-sm'>
+      <span
+        class='input-group-prepend'>
+        <i class='input-group-text fa fa-filter'></i></span>
+      <input
+        type='text'
+        class='form-control'
+        placeholder='Filter'
+        value.bind='filtertext & debounce: 500'
+        readonly.bind='disabled'
+        autocomplete='off' />
+    </div>
+    <slot name='customFilter'></slot>
+  </div>
+  <div
+    class='d-flex flex-column'
+    style='box-shadow: 0 1px 2px rgba(0,0,0,.2);'>
+    <div
+      ref='itemsCt'
+      class='h-100 d-block list-group'
+      tabindex='-1'
+      style='box-shadow: none; outline: 0; overflow-x: hidden; overflow-y: auto;'>
+      <div repeat.for='item of filteredItems'
+        class="relative list-group-item d-flex ${selectionVersion && isItemSelected(item) ? 'active' : ''} cursor-pointer border-left-0 border-right-0"
+        tabindex='-1'
+        item.bind='item'
+        disabled.bind='disabled'
+        keydown.delegate='onKeyDown($event, $index)'
+        click.delegate='onClickItem(item)'
+        dblclick.delegate='onDblClickItem(item)'
+        contextmenu.delegate='contextMenuConfig = { item, event: $event }'
+        focus.to-view='refreshFocusTrigger && focusOnSelect && selectedItem === item && hasFocus(selectedItem)'>
+        <div class='flex-fill trim-table text-nowrap'>
+          <span replaceable part='item-display'>${resolve(item, itemDisplay)}</span>
+        </div>
+        <button
+          class='btn btn-xs btn-default'
+          disabled.bind='disabled'
+          click.delegate='$event.stopPropagation() || (contextMenuConfig = { item, event: $event })'><i class='fa fa-ellipsis-v fa-fw'></i></button>
+      </div>
+    </div>
+  </div>
+  <div
+    if.bind='contextMenuConfig'
+    ref='contextmenuEl'
+    portal
+    blur.bind='contextMenuConfig'
+    cf-attached.bind='checkScrollingOutside'
+    cf-detached.bind='disposeScrollingCheck'
+    cf-ensure-visible
+    style='position: absolute;'
+    css='top: ${contextMenuConfig.event.clientY & oneTime}px; left: ${contextMenuConfig.event.clientX & oneTime}px; z-index: ${contextMenuZIndex};'>
+    <div
+      role='menu'
+      class='relative dropdown-menu show no-float floating-shadow m-0'>
+      <template replaceable part='menu-before'></template>
+      <div class="dropdown-header" role="presentation">Actions:</div>
+      <button
+        show.bind='updateItem'
+        click.delegate='updateItem(contextMenuConfig.item)'
+        class='dropdown-item mr-1'>
+        <i class='fa fa-edit mr-1'></i>
+        Edit
+      </button>
+      <button
+        show.bind='deleteItem'
+        click.delegate='deleteItem(contextMenuConfig.item)'
+        class='dropdown-item'>
+        <i class='fa fa-times mr-1'></i>
+        Delete
+      </button>
+      <template with.bind='{ item: contextMenuConfig.item }'>
+        <template replaceable part='menu-after'></template>
+      </template>
+    </div>
+  </div>
+</template>

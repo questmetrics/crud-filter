@@ -1,0 +1,19 @@
+.crud-filter .list-group-item:focus {
+  outline: 1px dashed #333;
+}
+.crud-filter .list-group-item:not(.active):hover {
+  background-color: #e2e2e2;
+}
+.crud-filter.disabled  .list-group-item:not(.active) {
+  background-color: #f2f2f2;
+}
+/* for user editor - user id badge */
+.crud-filter .list-group-item-hover {
+  display: none;
+}
+.crud-filter .list-group-item:hover .list-group-item-hover {
+  display: block;
+}
+.crud-filter .list-group-item.active:hover .list-group-item-hover {
+  color: #fff!important;
+}
