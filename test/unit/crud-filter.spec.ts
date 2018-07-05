@@ -1,5 +1,5 @@
-import { AppViewModel } from './utilities';
-import { configure, CrudFilter } from '../../src/index';
+import { AppViewModel, AppItem } from './utilities';
+import { configure } from '../../src/index';
 // import { bootstrap } from 'aurelia-bootstrapper';
 import { configure as configureTemplatingBinding } from 'aurelia-templating-binding';
 import { configure as configureTemplatingResources } from 'aurelia-templating-resources';
@@ -9,8 +9,8 @@ import { WebpackLoader } from 'aurelia-loader-webpack';
 
 describe('router-view', () => {
   let aurelia: Aurelia;
-  let component: ComponentTester;
-  let app: AppViewModel;
+  let component: ComponentTester<AppViewModel>;
+  let view: string;
   const originalConfigure = ComponentTester.prototype.configure;
 
   beforeAll(() => {
@@ -29,22 +29,23 @@ describe('router-view', () => {
   beforeEach(() => {
     aurelia = new Aurelia(new WebpackLoader());
 
-    component = StageComponent
-      .withResources()
-      .inView('<crud-filter view-model.ref="crudFilter" item-key="name" items.bind="items"></crud-filter>')
-      .boundTo(app = new AppViewModel());
+    component = StageComponent.withResources();
   });
 
   afterEach(() => {
     component.dispose();
   });
 
-  it('should leave original items intact', done => {
+  it('should leave original items alone', done => {
+    view = '<crud-filter view-model.ref="crudFilter" item-key="name" items.bind="items"></crud-filter>';
     component
+      .inView(view)
+      .boundTo(new AppViewModel())
       .create(cfg => cfg(aurelia))
       .then(() => {
+        const app = component.viewModel;
         expect(app.items).toBe(app.crudFilter.items, 'CF `items` collection should be the same with original');
-        expect(app.items).not.toBe(app.crudFilter.filteredItems);
+        expect(app.items).not.toBe(app.crudFilter.filteredItems as AppItem[]);
       })
       .catch(e => {
         expect(e).toBeFalsy('It should have created the view');

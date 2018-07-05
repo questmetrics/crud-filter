@@ -1,16 +1,24 @@
-# aurelia-skeleton-plugin-ts-webpack
+# aurelia-crud-filter
 
-[![Build status](https://ci.appveyor.com/api/projects/status/REPLACE_THIS/branch/master?svg=true)](https://ci.appveyor.com/project/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack/branch/master)
-[![CircleCI](https://circleci.com/gh/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack.svg?style=svg)](https://circleci.com/gh/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack)
-[![Coverage Status](https://coveralls.io/repos/github/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack/badge.svg?branch=master)](https://coveralls.io/github/aurelia-contrib/aurelia-plugin-skeleton-ts-webpack?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/questmetrics/branch/master?svg=true)](https://ci.appveyor.com/project/questmetrics/crud-filter/branch/master)
+[![CircleCI](https://circleci.com/gh/questmetrics/crud-filter.svg?style=svg)](https://circleci.com/gh/questmetrics/crud-filter)
+[![Coverage Status](https://coveralls.io/repos/github/questmetrics/crud-filter/badge.svg?branch=master)](https://coveralls.io/github/questmetrics/crud-filter?branch=master)
 
-A plugin skeleton that utilizes `nps` to fully automate the release process.
+A custom element for managing common CRUD operations
 
-Optimized for development in Visual Studio Code.
+## Installation
 
-# 1. Initial setup
+```
+npm install aurelia-crud-filter --save
+```
 
-## 1.0 (optional) Do a test run
+## Development
+
+  * Standard process: pull, install and build
+    ```
+    npm install
+    npm run build
+    ```
 
 -  Follow all steps below, but with a throwaway plugin name and `npm unpublish` + delete the github repository after you've tried out the process
 
