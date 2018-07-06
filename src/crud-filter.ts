@@ -1,4 +1,4 @@
-import { bindingMode, DOM, ElementEvents, IStaticViewConfig, PLATFORM } from 'aurelia-framework';
+import { bindingMode, DOM, ElementEvents, IStaticViewConfig, PLATFORM, TaskQueue } from 'aurelia-framework';
 import { bindable, observable } from 'aurelia-typed-observable-plugin';
 import dragula from 'dragula';
 import { Filter, Sort, CfEnsureVisible, CfDetached, CfAttached, CfClone } from './resources';
@@ -68,7 +68,7 @@ export class CrudFilter<T extends Record<string, any> = object> {
    * @internal Declare dependencies needed for this element
    */
   public static inject(): any[] {
-    return [DOM.Element];
+    return [DOM.Element, TaskQueue];
   }
 
   @bindable()
@@ -217,11 +217,17 @@ export class CrudFilter<T extends Record<string, any> = object> {
    * @internal
    */
   private $el: Element;
+  /**
+   * @internal
+   */
+  private tq: TaskQueue;
 
   constructor(
-    $el: typeof DOM.Element
+    $el: typeof DOM.Element,
+    taskQueue: TaskQueue
   ) {
     this.$el = $el as any;
+    this.tq = taskQueue;
   }
 
   /**
@@ -238,6 +244,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
     if (this.draggable) {
       this.$el.removeAttribute('draggable');
     }
+    // Note that the way `filteredItems` is calculated requires
+    // autoSelectChanged to be calculated after `filteredItems` has been calculated for the first time
+    this.tq.queueMicroTask(() => this.autoSelectChanged(this.autoSelect));
   }
 
   /**
@@ -245,7 +254,7 @@ export class CrudFilter<T extends Record<string, any> = object> {
    */
   public attached(): void {
     this.$isAttached = true;
-    this.autoSelectChanged(this.autoSelect);
+    this.focus();
     this.setupDnD();
   }
 
@@ -268,9 +277,9 @@ export class CrudFilter<T extends Record<string, any> = object> {
   /**
    * @internal Aurelia change handler for property `autoSelect`
    */
-  public autoSelectChanged(_autoSelect: string | boolean): void {
+  public autoSelectChanged(autoSelect: boolean): void {
     const items = this.getItems();
-    if (this.autoSelect && items.length && !this.selectedItem) {
+    if (autoSelect && items.length && !this.selectedItem) {
       this.selectedItem = items[0];
     }
   }
