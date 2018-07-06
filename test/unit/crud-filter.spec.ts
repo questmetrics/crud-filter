@@ -114,7 +114,7 @@ describe('crud-filter', () => {
     });
 
     it('autoselects', done => {
-      const app: AppViewModel = new AppViewModel();
+      const app: AppViewModel = new AppViewModel(1);
       view = `<crud-filter
         view-model.ref="crudFilter"
         ref="crudFilterEl"

@@ -1,7 +1,7 @@
 # aurelia-crud-filter
 
 [![Build status](https://ci.appveyor.com/api/projects/status/questmetrics/branch/master?svg=true)](https://ci.appveyor.com/project/questmetrics/crud-filter/branch/master)
-[![CircleCI](https://circleci.com/gh/questmetrics/crud-filter.svg?style=svg)](https://circleci.com/gh/questmetrics/crud-filter)
+[![TravisCI](https://travis-ci.com/questmetrics/crud-filter.svg?branch=master)](https://travis-ci.com/questmetrics/crud-filter)
 [![Coverage Status](https://coveralls.io/repos/github/questmetrics/crud-filter/badge.svg?branch=master)](https://coveralls.io/github/questmetrics/crud-filter?branch=master)
 
 A custom element for managing common CRUD operations
